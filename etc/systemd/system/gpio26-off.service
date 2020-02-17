@@ -1,0 +1,11 @@
+[Unit]
+Description=Power off device
+DefaultDependencies=no
+After=final.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/gpio26-off
+
+[Install]
+WantedBy=multi-user.target

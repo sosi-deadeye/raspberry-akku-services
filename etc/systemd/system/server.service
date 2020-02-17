@@ -1,0 +1,11 @@
+[Unit]
+Description=Daemon für Messwerte
+
+[Service]
+Type=simple
+WorkingDirectory=/root/akku
+ExecStart=/root/venv/bin/python /root/akku/server.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

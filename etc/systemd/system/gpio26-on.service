@@ -1,0 +1,10 @@
+[Unit]
+Description=Stay on GPIO26
+DefaultDependencies=no
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/gpio26-on
+
+[Install]
+WantedBy=local-fs-pre.target

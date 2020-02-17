@@ -1,0 +1,12 @@
+[Unit]
+Description=Set ap name and hostname to cpu serial
+Before=network-pre.target
+Wants=network-pre.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/setapname
+RemainAfterExit=false
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,11 @@
+[Unit]
+Description=Api service für den Akku
+
+[Service]
+Type=simple
+WorkingDirectory=/root/akku
+ExecStart=/root/venv/bin/uvicorn --host 127.0.0.1 --port 8000 api:app
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

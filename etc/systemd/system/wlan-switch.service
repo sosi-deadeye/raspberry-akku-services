@@ -1,0 +1,11 @@
+[Unit]
+Description=Daemon fuer die Umschaltung zwischen AP-Mode und Client-Mode.
+
+[Service]
+Type=simple
+WorkingDirectory=/root/akku
+ExecStart=/root/venv/bin/python /root/akku/wifi_switch.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

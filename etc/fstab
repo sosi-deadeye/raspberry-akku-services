@@ -1,0 +1,10 @@
+proc                  /proc           proc    defaults              0       0
+PARTUUID=3236664a-01  /boot           vfat    defaults,ro           0       2
+PARTUUID=3236664a-02  /               ext4    defaults,noatime,ro   0       1
+
+/dev/mmcblk0p3        /media/data     vfat    defaults,noatime,rw   0       0
+
+/dev/zram0            /tmp            tmpfs   nosuid,nodev          0       0
+/dev/zram0            /var/log        tmpfs   nosuid,nodev          0       0
+/dev/zram0            /var/tmp        tmpfs   nosuid,nodev          0       0
+/dev/zram0            /var/lib/misc   tmpfs   nosuid,nodev          0       0

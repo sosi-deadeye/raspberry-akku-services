@@ -1,0 +1,12 @@
+[Unit]
+Description=Add ap0
+Before=network-pre.target
+Wants=network-pre.target
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/iw phy phy0 interface add ap0 type __ap
+RemainAfterExit=false
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+import re
+from pathlib import Path
+from subprocess import run
+
+
+def get_serial():
+    cpuinfo = Path('/proc/cpuinfo').read_text()
+    # Serial          : 00000000413c11de
+    for line in cpuinfo.splitlines():
+        if 'Serial' in line:
+            return line.strip().split(':')[1].strip()[8:]
+
+
+def set_ap():
+    hostapd_conf = Path('/etc/hostapd/hostapd.conf')
+    try:
+        new_config = re.sub(r'^ssid=(.*)', f'ssid=Akku_{get_serial()}', hostapd_conf.read_text(), flags=re.MULTILINE)
+    except:
+        pass
+    else:
+        if new_config:
+            hostapd_conf.write_text(new_config)
+
+def set_hostname():
+    serial = get_serial()
+    run(['hostname', 'Akku{}'.format(serial)])
+
+
+def set_hostname_dhclient():
+    hostname = f'Akku{get_serial()}'
+    fmt = 'send host-name = "{}";'
+    regex = re.compile(r'send host\-name ?= ?"?(.+)"?;')
+    config = Path('/media/data/dhclient.conf')
+    old = config.read_text()
+    result = regex.search(old)
+    if result:
+        new = regex.sub(fmt.format(hostname), config.read_text())
+        if new != old:
+            config.write_text(new)
+
+
+if __name__ == '__main__':
+    set_ap()
+    set_hostname()
+    set_hostname_dhclient()

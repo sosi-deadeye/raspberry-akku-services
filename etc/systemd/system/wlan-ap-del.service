@@ -1,0 +1,10 @@
+[Unit]
+Description=Del ap0
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/iw dev ap0 del
+RemainAfterExit=false
+
+[Install]
+WantedBy=multi-user.target
